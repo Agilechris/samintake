@@ -1,0 +1,23 @@
+version: "3.9"
+
+services:
+    jsonapi:
+        build:
+            context: /home/samadmin/samlocal/imgproc/containers/SamJson/
+        ports:
+            - 5000:5000
+        volumes:
+            - /home/samadmin/samlocal/imgproc/containers/SamJson:/app,
+            - /home/samadmin/samlocal/imgproc/SAMData:/data
+    samintake:
+        build:
+            context: /home/samadmin/samlocal/imgproc/containers/SamIntake/
+        ports:
+            - 5001:5000
+        volumes:
+            - /home/samadmin/samlocal/imgproc/containers/SamIntake:/app,
+            - /home/samadmin/samlocal/imgproc/SAMData:/data
+        environment:
+            - CREATOR= "${CREATOR}"
+            - COPYRIGHT= u"${COPYRIGHT}"
+            - LOGFILE= "${LOGFILE}"
